@@ -1,7 +1,7 @@
 <h1 align="center">
   <br>
   <a href="">
-    <img src="https://i.ibb.co/N66NSK4Z/animated.gif" alt="Antenna" style="width:100%; max-width:800px; height:auto; border-radius:12px;">
+    <img src="https://i.ibb.co/JFxyPGzc/DOSBox-X.png" alt="Antenna" style="width:100%; max-width:800px; height:auto; border-radius:12px;">
   </a>
   <br>
   🎨 DOS-X ASM 2D Draw App
