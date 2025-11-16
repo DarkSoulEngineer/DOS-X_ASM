@@ -24,6 +24,23 @@
   --shadow: 0 0 12px rgba(255, 176, 58, 0.18), 0 0 32px rgba(255, 176, 58, 0.09);
 }
 
+/* nav style */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
 * {
   box-sizing: border-box
 }
