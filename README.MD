@@ -8,7 +8,7 @@
   <br>
 </h1>
 
-- [Romanian 🇷🇴](https://DarkSoulEngineer.github.io/DOS-X_ASM/index_ro.html)
+- [Romanian RO](https://DarkSoulEngineer.github.io/DOS-X_ASM/index_ro.html)
 - [English EN](https://DarkSoulEngineer.github.io/DOS-X_ASM/index_en.html)
 
 # Application
