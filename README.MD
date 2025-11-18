@@ -11,10 +11,9 @@
 - [Romanian 🇷🇴](https://DarkSoulEngineer.github.io/DOS-X_ASM/index_ro.html)
 - [English EN](https://DarkSoulEngineer.github.io/DOS-X_ASM/index_en.html)
 
-
 # Application
 
-A modular assembly language PoC program that provides an interactive menu-driven interface for drawing geometric shapes in graphics mode. Built with **x86 assembly**, this application demonstrates efficient low-level programming with clean separation of concerns.
+A modular assembly language PoC program that provides an interactive menu-driven interface for drawing geometric shapes in graphics mode. Built with **x86 assembly**.
 
 ---
 
@@ -63,7 +62,7 @@ The application follows a **modular design pattern** where each component handle
 ## 💻 Usage
 
 0. Ensure DOSBOX-X is installed and configured correctly.
-1. Compile the assembly source files using an x86 assembler (**MASM** or **TASM** compatible).
+1. Compile the assembly source files using an x86 assembler **TASM**.
 2. Run the executable to launch the application.  
 3. Navigate through menus using numeric selections.  
 4. Follow prompts to specify drawing parameters.  
@@ -75,49 +74,26 @@ The application follows a **modular design pattern** where each component handle
 
 Project documentation (general description, block diagram, operation diagram, test plan) is published from the `docs/` folder.
 
-- Online: enable GitHub Pages for this repo and point it to `docs/` (Settings → Pages)
-- Local: open `docs/index.html` in a browser
+- GitHub Pages
 
 ---
 
-## 🧱 Notes on repository hygiene
+## 🔧 Build
 
-- Images are currently raw screenshots under `images/`. Recommended structure:
-  - `assets/images/captures/` for screenshots (now populated)
-  - `assets/images/diagrams/` for diagrams (moved `diagrama_bloc.png` here)
-- Keep comments in code in English.
-
----
-
-## 🏷️ Versioning strategy
-
-- Prefer Git tags (e.g., `v1.0.0`) and/or a `release/` branch instead of keeping multiple copies in `versions/`.
-- Keep `main` stable; cut a tag before releases.
-- You can remove or archive the `versions/` folder once tags are created.
-
----
-
-## 🔧 Build quickstart
-
-MASM:
-
-```
-masm application\MAIN.ASM;
-masm application\MENU.ASM;
-masm application\DRAWM.ASM;
-masm application\DRAWL.ASM;
-masm application\DRAWS.ASM;
-masm application\INP.ASM;
-masm application\DATA.ASM;
-masm application\IO.ASM;
-link MAIN MENU DRAWM DRAWL DRAWS INP DATA IO;
+TASM:
+``` bash
+tasm application\MAIN.ASM;
+tasm application\MENU.ASM;
+tasm application\DRAWM.ASM;
+tasm application\DRAWL.ASM;
+tasm application\DRAWS.ASM;
+tasm application\INP.ASM;
+tasm application\DATA.ASM;
+tasm application\IO.ASM;
+tasm MAIN MENU DRAWM DRAWL DRAWS INP DATA IO;
 ```
 
-Or TASM:
-
-```
-tasm /m2 application\MAIN.ASM
-...
+``` bash
 tlink /t MAIN MENU DRAWM DRAWL DRAWS INP DATA IO
 ```
 
