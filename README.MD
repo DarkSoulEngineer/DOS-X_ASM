@@ -1,100 +1,82 @@
-<h1 align="center">
-  <br>
-  <a href="">
-    <img src="https://emulation.gametechwiki.com/images/thumb/9/99/DOSBox-X.png/180px-DOSBox-X.png" alt="DOSBox-X" style="width:40%; max-width:200px; height:auto; border-radius:12px;">
-  </a>
-  <br>
-    DOSBox-X ASM 2D Draw App
-  <br>
-</h1>
+DOSBox-X ASM 2D Draw App
+========================
 
-- [Romanian RO](https://DarkSoulEngineer.github.io/DOS-X_ASM/index_ro.html)
-- [English EN](https://DarkSoulEngineer.github.io/DOS-X_ASM/index_en.html)
+[Romanian (RO)](https://DarkSoulEngineer.github.io/DOS-X_ASM/index_ro.html) | [English (EN)](https://DarkSoulEngineer.github.io/DOS-X_ASM/index_en.html)
 
-# Application
+Overview
+--------
 
-A modular assembly language PoC program that provides an interactive menu-driven interface for drawing geometric shapes in graphics mode. Built with **x86 assembly**.
+Menu-driven drawing toolkit for DOS, written in 16-bit x86 assembly (8086). Runs in text mode for input and switches to VGA Mode 13h (320x200, 256 colors) for rendering. Ships with build scripts and Obsidian-formatted docs for quick onboarding.
 
----
+Features
+--------
 
-## 🧭 Features
+- Interactive text menu with numeric navigation
+- Mode 13h rendering with direct video memory access
+- Drawing primitives: pixels, lines, filled squares, and outlines
+- File I/O: save the current screen to `IMAGE.BIN`, load or preview an existing image, resume drawing on loaded canvases
+- Buffer restore before drawing when an image is loaded
+- Designed for DOS or DOSBox/DOSBox-X
 
-- **Interactive Menu System:** Hierarchical menus for easy navigation  
-- **Direct Video Drawing:** Efficient drawing of shapes using direct video memory access
-- **Shape Drawing:** Support for lines (horizontal/vertical) and squares (filled/outline)  
-- **Parameter Customization:** Configurable size, position, and color options  
-- **Minimal Input Validation:** numeric input handling with some validation  
-- **Screen Management:** Proper video mode switching and screen clearing
+Project Layout
+--------------
 
----
+- `app/src` - assembly sources (`MAIN.ASM`, `MENU.ASM`, `IO.ASM`, `FILE.ASM`, `PIXEL.ASM`, `SHAPES.ASM`, `INP.ASM`, `DATA.ASM`)
+- `app/scripts` - build helpers (`build.bat`, `clean.bat`)
+- `app/build` - generated `.EXE`, `.OBJ`, `.MAP`, `.BIN`, logs
+- `app/tools` - TASM, TLINK, Turbo Debugger
+- `docs` - Obsidian vault with getting-started, architecture, and module reference
+- `assets` / `versions` - supporting media and backups
 
-## 📂 Project Structure
+Build and Run
+-------------
 
-- application/ (source, ASM modules)
-  - MAIN.ASM — entry point and initialization
-  - MENU.ASM — main menu interface and navigation
-  - DRAWM.ASM — drawing submenu (shape selection)
-  - DRAWL.ASM — line drawing primitives and menu
-  - DRAWS.ASM — square drawing (filled/outline)
-  - IO.ASM — I/O utilities and screen management
-  - INP.ASM — numeric input handling (buffered input)
-  - DATA.ASM — data definitions, messages, constants
-- docs/ (GitHub Pages printable documentation)
-  - index.html — description, block diagram, operation, test plan
-  - styles.css — minimal styling
-- images/ — raw screenshots and figures (to be curated)
-- versions/ — archived evolutions of the project
+Prerequisite: DOSBox-X (or DOSBox) installed and on your PATH.
 
----
+1) Open a shell in `app\scripts`.
+2) Build (defaults to `MAIN.ASM`):
+   ```batch
+   build.bat
+   ```
+   Build a specific module:
+   ```batch
+   build.bat MENU
+   ```
+3) Run the executable from `app` (DOSBox-X CLI example):
+   ```batch
+   dosbox-x -c "mount c ." -c "c:" -c "build\\MAIN.exe"
+   ```
+4) To clean artifacts (from `app\scripts`):
+   ```batch
+   clean.bat
+   ```
 
-## ⚙️ Technical Architecture
+Usage
+-----
 
-The application follows a **modular design pattern** where each component handles specific responsibilities:
+1) Launch `MAIN.exe` in DOS or DOSBox-X.
+2) Navigate menus with number keys.
+3) Choose a drawing action (line, filled square, outline) and supply coordinates, size, and color values when prompted.
+4) Save or load screens to or from `IMAGE.BIN`; loaded images are restored before new draws.
+5) Exit via the menu when finished.
 
-- **Core Module (`MAIN.ASM`):** Initializes the environment and launches the main menu  
-- **UI Layer (`MENU.ASM`, `DRAWM.ASM`):** Handles user interface and menu navigation  
-- **Graphics Engine (`DRAWL.ASM`, `DRAWS.ASM`):** Implements shape drawing algorithms  
-- **System Services (`IO.ASM`, `INP.ASM`):** Provides I/O operations and input validation  
-- **Data Management (`DATA.ASM`):** Centralizes all data definitions and messages  
+Architecture Notes
+------------------
 
----
+- `MAIN.ASM` initializes, clears the screen, and hands off to `ShowMenu` in `MENU.ASM`.
+- `IO.ASM` handles text-mode output and Mode 13h setup.
+- `PIXEL.ASM` exposes the pixel primitive; `SHAPES.ASM` builds line and square routines on top.
+- `FILE.ASM` manages capture and restore, save, load, preview, and load-time buffering.
+- `INP.ASM` contains numeric input helpers and prompts.
 
-## 💻 Usage
+Documentation (@docs)
+---------------------
 
-0. Ensure DOSBOX-X is installed and configured correctly.
-1. Compile the assembly source files using an x86 assembler **TASM**.
-2. Run the executable to launch the application.  
-3. Navigate through menus using numeric selections.  
-4. Follow prompts to specify drawing parameters.  
-5. View rendered shapes in graphics mode.  
-
----
-
-## 📖 Documentation (GitHub Pages)
-
-Project documentation (general description, block diagram, operation diagram, test plan) is published from the `docs/` folder.
-
-- GitHub Pages
-
----
-
-## 🔧 Build
-
-TASM:
-``` bash
-tasm application\MAIN.ASM;
-tasm application\MENU.ASM;
-tasm application\DRAWM.ASM;
-tasm application\DRAWL.ASM;
-tasm application\DRAWS.ASM;
-tasm application\INP.ASM;
-tasm application\DATA.ASM;
-tasm application\IO.ASM;
-tasm MAIN MENU DRAWM DRAWL DRAWS INP DATA IO;
-```
-
-``` bash
-tlink /t MAIN MENU DRAWM DRAWL DRAWS INP DATA IO
-```
+- Start at `docs/README.md` for the Obsidian index.
+- New to the project? Follow `docs/01-Getting-Started/Project-Overview.md` then `docs/01-Getting-Started/Build-Guide.md`.
+- For design details, see `docs/02-Technical/Architecture.md`.
+- For APIs and entry points, see `docs/03-Reference/Modules.md`.
 
 ---
+
+Universitatea Transilvania din Brasov - MIC (Microcontrollers), 2025.

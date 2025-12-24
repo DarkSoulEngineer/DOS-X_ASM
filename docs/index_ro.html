@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DOSBox‑X ASM 2D Draw App – Documentație</title>
+  <title>Aplicatie de desen in DOSBox-X ASM 2D - Documentatie</title>
   <link rel="stylesheet" href="styles.css" />
   <script src="core.js"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,133 +26,131 @@
       <a href="index_en.html">EN English</a>
     </div>
     <div class="header-body">
-      <h1>DOSBox‑X ASM 2D Draw App</h1>
-      <p>Intel 8086 (16‑bit) • DOSBox‑X • TASM</p>
+      <h1>Aplicatie DOSBox-X ASM 2D Draw</h1>
+      <p>Intel 8086 (16-bit) | DOSBox-X | TASM</p>
     </div>
   </header>
 
   <main>
 
     <section id="overview">
-      <h2>1. Descriere generală</h2>
+      <h2>1. Descriere generala</h2>
       <p>
-        Aplicație modulară în limbaj de asamblare x86, oferind un meniu interactiv
-        pentru desenarea de forme 2D în mod grafic (13h). Proiectul demonstrează
-        folosirea tastaturii (input), a ecranului (text și grafic) și a memoriei
-        (segment de date, VRAM A000h).
+        Aplicatie de desen cu meniu text pentru DOS, scrisa in limbaj de asamblare x86 pe 16 biti. Ruleaza in modul text
+        pentru input si comuta in modul grafic VGA 13h (320x200, 256 culori) pentru randare. Demonstreaza lucrul cu
+        tastatura, afisajul si scrierea directa in memoria video A000h.
       </p>
       <ul>
         <li><strong>Microprocesor</strong>: Intel 8086 (real mode)</li>
-        <li><strong>Periferice</strong>: tastatură (INT 21h/01h, INT 16h), display (INT 10h), memorie (A000h)</li>
-        <li><strong>Mediu execuție</strong>: DOSBox‑X</li>
+        <li><strong>Periferice</strong>: tastatura (INT 21h/01h, INT 16h), display (INT 10h), memorie (A000h)</li>
+        <li><strong>Mediu de executie</strong>: DOSBox-X</li>
       </ul>
     </section>
 
     <section id="peripherals">
-      <h2>2. Periferice și servicii</h2>
+      <h2>2. Periferice si servicii</h2>
       <ul>
-        <li><strong>Tastatură</strong>: citire caracter (DOS INT 21h/01h), așteptare tastă (BIOS INT 16h/00h)</li>
-        <li><strong>Display</strong>: mod text 80×25 și mod grafic 13h 320×200×256 (BIOS INT 10h)</li>
-        <li><strong>Memorie</strong>: segment date DS, memorie video ES=A000h pentru pixeli</li>
+        <li><strong>Tastatura</strong>: citire caracter (DOS INT 21h/01h), asteptare tasta (BIOS INT 16h/00h)</li>
+        <li><strong>Display</strong>: mod text 80x25 si mod grafic 13h (320x200x256) prin BIOS INT 10h</li>
+        <li><strong>Memorie</strong>: segment de date DS; memorie video ES=A000h pentru pixeli</li>
       </ul>
-      <p><strong>Întreruperi utilizate</strong>:</p>
+      <p><strong>Intreruperi utilizate</strong>:</p>
       <ul>
-        <li>INT 10h – AH=00h (set video mode), AH=02h (cursor), AH=06h (scroll/clear)</li>
-        <li>INT 21h – AH=09h (print string), AH=01h (read char), AH=4Ch (exit)</li>
-        <li>INT 16h – AH=00h (wait for key)</li>
+        <li>INT 10h - AH=00h (setare mod video), AH=02h (cursor), AH=06h (scroll/clear)</li>
+        <li>INT 21h - AH=09h (afisare sir), AH=01h (citire caracter), AH=4Ch (iesire)</li>
+        <li>INT 16h - AH=00h (asteptare tasta)</li>
       </ul>
     </section>
 
     <section id="block-diagram">
-      <h2>3. Schemă bloc</h2>
+      <h2>3. Schema bloc</h2>
       <p>
-        Structura modulară: MAIN (inițializare) → MENU/DRAWM (UI) → DRAWL/DRAWS (algoritmi desen)
-        susținute de IO (servicii DOS/BIOS), INP (input numeric), DATA (mesaje/constante).
+        Structura modulara: MAIN (init) + MENU (UI) + SHAPES/PIXEL (desen) + FILE (salvare/incarcare) sustinute de IO
+        (servicii DOS/BIOS), INP (input numeric), DATA (mesaje/constante).
       </p>
       <figure class="figure-bordered">
         <img
           src="https://raw.githubusercontent.com/DarkSoulEngineer/DOS-X_ASM/main/assets/images/diagrams/block_diagram_v2.png"
-          alt="Schemă bloc a sistemului" />
-        <figcaption>Figura 1: Schemă bloc a sistemului</figcaption>
+          alt="Schema bloc a sistemului" />
+        <figcaption>Figura 1: Schema bloc a sistemului</figcaption>
       </figure>
     </section>
 
     <section id="operation">
-      <h2>4. Diagramă de funcționare</h2>
+      <h2>4. Flux de operare</h2>
       <ol>
-        <li>Start program: inițializează DS, curăță ecranul, afișează meniul principal.</li>
-        <li>Navigare: utilizatorul alege opțiunea (Line/Square/Back/Exit).</li>
-        <li>Colectare parametri: citire numerică în modul text.</li>
-        <li>Mod grafic: se comută la 13h, se desenează forma în VRAM.</li>
-        <li>Întoarcere: așteaptă o tastă, revine în modul text.</li>
+        <li>Start: initializeaza DS, curata ecranul, afiseaza meniul principal.</li>
+        <li>Navigare: utilizatorul alege optiunea (Line/Square/Back/Exit).</li>
+        <li>Parametri: colectare input numeric in modul text.</li>
+        <li>Mod grafic: comutare la 13h, desen in VRAM.</li>
+        <li>Intoarcere: asteapta o tasta, revine la modul text.</li>
       </ol>
     </section>
 
     <section id="test-plan">
       <h2>5. Plan de testare</h2>
-      <p>Scenarii recomandate pentru validare funcțională:</p>
+      <p>Scenarii recomandate pentru validare functionala:</p>
       <ol>
-        <li><strong>Linie orizontală</strong>: y=50, x=10, lățime=100, culoare=12 → se trasează pe rândul 50.</li>
-        <li><strong>Linie verticală</strong>: x=100, y=20, înălțime=80, culoare=10 → se trasează pe coloana 100.</li>
-        <li><strong>Pătrat plin</strong>: (x,y)=(40,40), mărime=40, culoare=4 → zonă umplută corect.</li>
-        <li><strong>Pătrat contur</strong>: (x,y)=(60,30), mărime=50, culoare=14 → doar marginile trasate.</li>
-        <li><strong>Input invalid</strong>: caractere non-digit sau valori în afara intervalului → re‑prompt sau
-          ignorare.</li>
-        <li><strong>Tranziții mod</strong>: după desenare, apăsare tastă → revine la modul text, ecran curat.</li>
+        <li><strong>Linie orizontala</strong>: y=50, x=10, latime=100, culoare=12 -> trasata pe randul 50.</li>
+        <li><strong>Linie verticala</strong>: x=100, y=20, inaltime=80, culoare=10 -> trasata pe coloana 100.</li>
+        <li><strong>Patrat plin</strong>: (x,y)=(40,40), marime=40, culoare=4 -> zona umpluta.</li>
+        <li><strong>Patrat contur</strong>: (x,y)=(60,30), marime=50, culoare=14 -> doar muchiile.</li>
+        <li><strong>Input invalid</strong>: caractere non-digit sau valori in afara intervalului -> re-prompt sau ignorare.</li>
+        <li><strong>Tranzitii de mod</strong>: dupa desenare, apasare tasta -> revine la modul text, ecran curat.</li>
       </ol>
-      <h3>Matrix de test (parametri vs rezultate așteptate)</h3>
+      <h3>Matrice de test (parametri vs rezultate asteptate)</h3>
       <table>
         <thead>
           <tr>
             <th>Caz</th>
             <th>Parametri</th>
-            <th>Condiții</th>
-            <th>Rezultat așteptat</th>
+            <th>Conditii</th>
+            <th>Rezultat asteptat</th>
             <th>Limite</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Linie orizontală validă</td>
+            <td>Linie orizontala valida</td>
             <td>x=10, y=50, width=100, color=12</td>
-            <td>0≤x≤219, 0≤y≤199</td>
+            <td>0&lt;=x&lt;=219, 0&lt;=y&lt;=199</td>
             <td>Segment orizontal pe y=50, 100 pixeli</td>
-            <td>Clipping dacă x+width>319</td>
+            <td>Clipping daca x+width>319</td>
           </tr>
           <tr>
-            <td>Linie verticală validă</td>
+            <td>Linie verticala valida</td>
             <td>x=100, y=20, height=80, color=10</td>
-            <td>0≤y≤119, 0≤x≤319</td>
+            <td>0&lt;=y&lt;=119, 0&lt;=x&lt;=319</td>
             <td>Segment vertical pe x=100, 80 pixeli</td>
-            <td>Clipping dacă y+height>199</td>
+            <td>Clipping daca y+height>199</td>
           </tr>
           <tr>
-            <td>Pătrat plin valid</td>
+            <td>Patrat plin valid</td>
             <td>x=40, y=40, size=40, color=4</td>
-            <td>0≤x≤279, 0≤y≤159</td>
-            <td>Zonă umplută size×size</td>
+            <td>0&lt;=x&lt;=279, 0&lt;=y&lt;=159</td>
+            <td>Zona umpluta size x size</td>
             <td>Clipping la margini</td>
           </tr>
           <tr>
-            <td>Pătrat contur valid</td>
+            <td>Patrat contur valid</td>
             <td>x=60, y=30, size=50, color=14</td>
-            <td>0≤x≤269, 0≤y≤149</td>
+            <td>0&lt;=x&lt;=269, 0&lt;=y&lt;=149</td>
             <td>Doar muchiile trasate</td>
             <td>Clipping la margini</td>
           </tr>
           <tr>
-            <td>Culoare invalidă</td>
+            <td>Culoare invalida</td>
             <td>color=200</td>
             <td>n/a</td>
-            <td>Re‑prompt/mesaj eroare</td>
-            <td>Valorile valabile: 0–15</td>
+            <td>Re-prompt/mesaj de eroare</td>
+            <td>Valori valide: 0-15</td>
           </tr>
           <tr>
-            <td>Coordonate out‑of‑range</td>
+            <td>Coordonate in afara ecranului</td>
             <td>x=400, y=300</td>
             <td>n/a</td>
-            <td>Re‑prompt/ajustare/clipping</td>
-            <td>Ecran: 320×200</td>
+            <td>Re-prompt/ajustare/clipping</td>
+            <td>Ecran: 320x200</td>
           </tr>
         </tbody>
       </table>
@@ -161,27 +159,24 @@
     <section id="implementation">
       <h2>6. Detalii de implementare</h2>
       <ul>
-        <li><strong>Mode 13h</strong>: 320×200, 256 culori; segment video ES=A000h.</li>
-        <li><strong>Pixel</strong>: offset = y × 320 + x; scriere octet culoare.</li>
-        <li><strong>Interfețe</strong>: INT 10h (video), INT 21h (I/O), INT 16h (tastatură BIOS).</li>
-        <li><strong>Module</strong>: vezi comentariile de antet în fișierele ASM.</li>
+        <li><strong>Mod 13h</strong>: 320x200, 256 culori; segment video ES=A000h.</li>
+        <li><strong>Pixel</strong>: offset = y*320 + x; scriere octet de culoare.</li>
+        <li><strong>Interfete</strong>: INT 10h (video), INT 21h (I/O), INT 16h (tastatura).</li>
+        <li><strong>Module</strong>: vezi comentariile din fisierele ASM.</li>
       </ul>
     </section>
 
     <section id="build-run">
       <h2>7. Build & Run</h2>
-      <p>Comenzi utile folosind TASM:</p>
-      <pre><code>tasm /m2 application\\MAIN.ASM
-tasm /m2 application\\MENU.ASM
-tasm /m2 application\\DRAWM.ASM
-tasm /m2 application\\DRAWL.ASM
-tasm /m2 application\\DRAWS.ASM
-tasm /m2 application\\INP.ASM
-tasm /m2 application\\DATA.ASM
-tasm /m2 application\\IO.ASM
-tlink /t MAIN MENU DRAWM DRAWL DRAWS INP DATA IO
+      <p>Flux recomandat cu scripturile din <code>app/scripts</code>:</p>
+      <pre><code>cd app\scripts
+build.bat            REM build pentru MAIN.ASM (implicit)
+build.bat MENU       REM build pentru un modul specific
+clean.bat            REM sterge artefactele de build
 </code></pre>
-      <p>Rulare: utilizați DOSBox‑X și lansați executabilul rezultat.</p>
+      <p>Ruleaza cu DOSBox-X din <code>app</code>:</p>
+      <pre><code>dosbox-x -c "mount c ." -c "c:" -c "build\MAIN.exe"
+</code></pre>
     </section>
 
     <section id="gallery">
@@ -195,8 +190,8 @@ tlink /t MAIN MENU DRAWM DRAWL DRAWS INP DATA IO
         </figure>
         <figure>
           <img src="https://raw.githubusercontent.com/DarkSoulEngineer/DOS-X_ASM/main/assets/images/captures/about.png"
-            alt="Despre echipă" />
-          <figcaption>Despre echipă</figcaption>
+            alt="Despre echipa" />
+          <figcaption>Despre echipa</figcaption>
         </figure>
         <figure>
           <img
@@ -231,14 +226,14 @@ tlink /t MAIN MENU DRAWM DRAWL DRAWS INP DATA IO
         <figure>
           <img
             src="https://raw.githubusercontent.com/DarkSoulEngineer/DOS-X_ASM/main/assets/images/captures/filled_square.png"
-            alt="Pătrat plin" />
-          <figcaption>Pătrat plin</figcaption>
+            alt="Patrat plin" />
+          <figcaption>Patrat plin</figcaption>
         </figure>
         <figure>
           <img
             src="https://raw.githubusercontent.com/DarkSoulEngineer/DOS-X_ASM/main/assets/images/captures/hallowed_square.png"
-            alt="Pătrat gol" />
-          <figcaption>Pătrat gol</figcaption>
+            alt="Patrat gol" />
+          <figcaption>Patrat gol</figcaption>
         </figure>
       </div>
     </section>
@@ -246,7 +241,7 @@ tlink /t MAIN MENU DRAWM DRAWL DRAWS INP DATA IO
   </main>
 
   <footer>
-    <p>© 2025 DOSBox‑X ASM 2D Draw App</p>
+    <p>&copy; 2025 DOSBox-X ASM 2D Draw App</p>
   </footer>
 
   <div class="crt-overlay" aria-hidden="true"></div>

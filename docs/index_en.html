@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DOSBox‑X ASM 2D Draw App – Documentation</title>
+  <title>DOSBox-X ASM 2D Draw App - Documentation</title>
   <link rel="stylesheet" href="styles.css" />
   <script src="core.js"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,8 +26,8 @@
       <a href="index_ro.html">RO Romanian</a>
     </div>
     <div class="header-body">
-      <h1>DOSBox‑X ASM 2D Draw App</h1>
-      <p>Intel 8086 (16‑bit) • DOSBox‑X • TASM</p>
+      <h1>DOSBox-X ASM 2D Draw App</h1>
+      <p>Intel 8086 (16-bit) | DOSBox-X | TASM</p>
     </div>
   </header>
 
@@ -35,15 +35,14 @@
     <section id="overview">
       <h2>1. General Description</h2>
       <p>
-        Modular x86 assembly application providing an interactive menu
-        for drawing 2D shapes in graphics mode (13h). The project demonstrates
-        the use of keyboard input, display (text and graphics), and memory
-        (data segment, VRAM A000h).
+        Menu-driven drawing toolkit for DOS, written in 16-bit x86 assembly. The app runs in text mode for input and
+        switches to VGA graphics mode 13h (320x200, 256 colors) for rendering. It showcases keyboard handling, display
+        control, and direct video memory writes to A000h.
       </p>
       <ul>
         <li><strong>Microprocessor</strong>: Intel 8086 (real mode)</li>
         <li><strong>Peripherals</strong>: keyboard (INT 21h/01h, INT 16h), display (INT 10h), memory (A000h)</li>
-        <li><strong>Execution Environment</strong>: DOSBox‑X</li>
+        <li><strong>Execution Environment</strong>: DOSBox-X</li>
       </ul>
     </section>
 
@@ -51,22 +50,22 @@
       <h2>2. Peripherals and Services</h2>
       <ul>
         <li><strong>Keyboard</strong>: read character (DOS INT 21h/01h), wait for key (BIOS INT 16h/00h)</li>
-        <li><strong>Display</strong>: text mode 80×25 and graphics mode 13h 320×200×256 (BIOS INT 10h)</li>
-        <li><strong>Memory</strong>: data segment DS, video memory ES=A000h for pixels</li>
+        <li><strong>Display</strong>: text mode 80x25 and graphics mode 13h (320x200x256) via BIOS INT 10h</li>
+        <li><strong>Memory</strong>: data segment DS; video memory ES=A000h for pixel writes</li>
       </ul>
       <p><strong>Interrupts used</strong>:</p>
       <ul>
-        <li>INT 10h – AH=00h (set video mode), AH=02h (cursor position), AH=06h (scroll/clear)</li>
-        <li>INT 21h – AH=09h (print string), AH=01h (read char), AH=4Ch (exit)</li>
-        <li>INT 16h – AH=00h (wait for key)</li>
+        <li>INT 10h - AH=00h (set video mode), AH=02h (cursor position), AH=06h (scroll/clear)</li>
+        <li>INT 21h - AH=09h (print string), AH=01h (read char), AH=4Ch (exit)</li>
+        <li>INT 16h - AH=00h (wait for key)</li>
       </ul>
     </section>
 
     <section id="block-diagram">
       <h2>3. Block Diagram</h2>
       <p>
-        Modular structure: MAIN (initialization) → MENU/DRAWM (UI) → DRAWL/DRAWS (drawing algorithms)
-        supported by IO (DOS/BIOS services), INP (numeric input), DATA (messages/constants).
+        Modular structure: MAIN (init) + MENU (UI) + SHAPES/PIXEL (drawing) + FILE (save/load) supported by IO (DOS/BIOS
+        services), INP (numeric input), DATA (messages/constants).
       </p>
       <figure class="figure-bordered">
         <img
@@ -77,13 +76,13 @@
     </section>
 
     <section id="operation">
-      <h2>4. Operation Diagram</h2>
+      <h2>4. Operation Flow</h2>
       <ol>
-        <li>Program start: initialize DS, clear screen, display main menu.</li>
-        <li>Navigation: user selects an option (Line/Square/Back/Exit).</li>
-        <li>Parameter input: numeric input in text mode.</li>
+        <li>Start: initialize DS, clear screen, show the main menu.</li>
+        <li>Navigation: user picks an option (Line/Square/Back/Exit).</li>
+        <li>Parameter input: numeric input collected in text mode.</li>
         <li>Graphics mode: switch to 13h, draw the shape in VRAM.</li>
-        <li>Return: wait for a key press, return to text mode.</li>
+        <li>Return: wait for a key press, then revert to text mode.</li>
       </ol>
     </section>
 
@@ -91,12 +90,12 @@
       <h2>5. Test Plan</h2>
       <p>Recommended scenarios for functional validation:</p>
       <ol>
-        <li><strong>Horizontal line</strong>: y=50, x=10, width=100, color=12 → drawn on row 50.</li>
-        <li><strong>Vertical line</strong>: x=100, y=20, height=80, color=10 → drawn on column 100.</li>
-        <li><strong>Filled square</strong>: (x,y)=(40,40), size=40, color=4 → area correctly filled.</li>
-        <li><strong>Square outline</strong>: (x,y)=(60,30), size=50, color=14 → only borders drawn.</li>
-        <li><strong>Invalid input</strong>: non-digit characters or out-of-range → re-prompt or ignore.</li>
-        <li><strong>Mode transitions</strong>: after drawing, key press → returns to text mode, screen cleared.</li>
+        <li><strong>Horizontal line</strong>: y=50, x=10, width=100, color=12 -> drawn on row 50.</li>
+        <li><strong>Vertical line</strong>: x=100, y=20, height=80, color=10 -> drawn on column 100.</li>
+        <li><strong>Filled square</strong>: (x,y)=(40,40), size=40, color=4 -> area filled.</li>
+        <li><strong>Square outline</strong>: (x,y)=(60,30), size=50, color=14 -> only borders drawn.</li>
+        <li><strong>Invalid input</strong>: non-digits or out-of-range -> re-prompt or ignore.</li>
+        <li><strong>Mode transitions</strong>: after drawing, key press -> back to text mode, screen cleared.</li>
       </ol>
       <h3>Test Matrix (parameters vs expected results)</h3>
       <table>
@@ -113,28 +112,28 @@
           <tr>
             <td>Valid horizontal line</td>
             <td>x=10, y=50, width=100, color=12</td>
-            <td>0≤x≤219, 0≤y≤199</td>
+            <td>0&lt;=x&lt;=219, 0&lt;=y&lt;=199</td>
             <td>Horizontal segment on y=50, 100 pixels</td>
-            <td>Clipping if x+width>319</td>
+            <td>Clip if x+width>319</td>
           </tr>
           <tr>
             <td>Valid vertical line</td>
             <td>x=100, y=20, height=80, color=10</td>
-            <td>0≤y≤119, 0≤x≤319</td>
+            <td>0&lt;=y&lt;=119, 0&lt;=x&lt;=319</td>
             <td>Vertical segment on x=100, 80 pixels</td>
-            <td>Clipping if y+height>199</td>
+            <td>Clip if y+height>199</td>
           </tr>
           <tr>
             <td>Valid filled square</td>
             <td>x=40, y=40, size=40, color=4</td>
-            <td>0≤x≤279, 0≤y≤159</td>
-            <td>Area filled size×size</td>
+            <td>0&lt;=x&lt;=279, 0&lt;=y&lt;=159</td>
+            <td>Area filled size x size</td>
             <td>Edge clipping</td>
           </tr>
           <tr>
             <td>Valid square outline</td>
             <td>x=60, y=30, size=50, color=14</td>
-            <td>0≤x≤269, 0≤y≤149</td>
+            <td>0&lt;=x&lt;=269, 0&lt;=y&lt;=149</td>
             <td>Only edges drawn</td>
             <td>Edge clipping</td>
           </tr>
@@ -143,14 +142,14 @@
             <td>color=200</td>
             <td>n/a</td>
             <td>Re-prompt/error message</td>
-            <td>Valid values: 0–15</td>
+            <td>Valid values: 0-15</td>
           </tr>
           <tr>
-            <td>Coordinates out-of-range</td>
+            <td>Out-of-range coords</td>
             <td>x=400, y=300</td>
             <td>n/a</td>
             <td>Re-prompt/adjustment/clipping</td>
-            <td>Screen: 320×200</td>
+            <td>Screen: 320x200</td>
           </tr>
         </tbody>
       </table>
@@ -159,27 +158,24 @@
     <section id="implementation">
       <h2>6. Implementation Details</h2>
       <ul>
-        <li><strong>Mode 13h</strong>: 320×200, 256 colors; video segment ES=A000h.</li>
-        <li><strong>Pixel</strong>: offset = y × 320 + x; write color byte.</li>
-        <li><strong>Interfaces</strong>: INT 10h (video), INT 21h (I/O), INT 16h (BIOS keyboard).</li>
+        <li><strong>Mode 13h</strong>: 320x200, 256 colors; video segment ES=A000h.</li>
+        <li><strong>Pixel math</strong>: offset = y*320 + x; write color byte.</li>
+        <li><strong>Interfaces</strong>: INT 10h (video), INT 21h (I/O), INT 16h (keyboard).</li>
         <li><strong>Modules</strong>: see header comments in ASM files.</li>
       </ul>
     </section>
 
     <section id="build-run">
       <h2>7. Build & Run</h2>
-      <p>Useful commands using TASM:</p>
-      <pre><code>tasm /m2 application\\MAIN.ASM
-tasm /m2 application\\MENU.ASM
-tasm /m2 application\\DRAWM.ASM
-tasm /m2 application\\DRAWL.ASM
-tasm /m2 application\\DRAWS.ASM
-tasm /m2 application\\INP.ASM
-tasm /m2 application\\DATA.ASM
-tasm /m2 application\\IO.ASM
-tlink /t MAIN MENU DRAWM DRAWL DRAWS INP DATA IO
+      <p>Recommended path using the provided scripts (rooted in <code>app/scripts</code>):</p>
+      <pre><code>cd app\scripts
+build.bat            REM build MAIN.ASM (default)
+build.bat MENU       REM build a specific module
+clean.bat            REM remove build artifacts
 </code></pre>
-      <p>Run: use DOSBox‑X and launch the resulting executable.</p>
+      <p>Run with DOSBox-X from <code>app</code>:</p>
+      <pre><code>dosbox-x -c "mount c ." -c "c:" -c "build\MAIN.exe"
+</code></pre>
     </section>
 
     <section id="gallery">
@@ -244,7 +240,7 @@ tlink /t MAIN MENU DRAWM DRAWL DRAWS INP DATA IO
   </main>
 
   <footer>
-    <p>© 2025 DOSBox‑X ASM 2D Draw App</p>
+    <p>&copy; 2025 DOSBox-X ASM 2D Draw App</p>
   </footer>
   <div class="crt-overlay" aria-hidden="true"></div>
 </body>
