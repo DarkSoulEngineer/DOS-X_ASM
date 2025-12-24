@@ -1,0 +1,21 @@
+{
+  "monoFontFamily": "",
+  "legacyEditor": false,
+  "livePreview": true,
+  "defaultViewMode": "source",
+  "strictLineBreaks": false,
+  "showLineNumber": true,
+  "spellcheck": true,
+  "spellcheckLanguages": null,
+  "foldHeading": true,
+  "foldIndent": true,
+  "showIndentGuide": true,
+  "rightToLeft": false,
+  "readableLineLength": true,
+  "alwaysUpdateLinks": true,
+  "attachmentFolderPath": "attachments",
+  "newFileLocation": "folder",
+  "newFileFolderPath": "",
+  "useMarkdownLinks": true,
+  "defaultFileExtension": "md"
+}

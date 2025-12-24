@@ -1,0 +1,9 @@
+
+ Start  Stop   Length Name               Class
+
+ 00000H 0034CH 0034DH _TEXT              CODE
+ 00350H 00995H 00646H _DATA              DATA
+ 009A0H 00A9FH 00100H STACK              STACK
+
+Program entry point at 0000:0342
+

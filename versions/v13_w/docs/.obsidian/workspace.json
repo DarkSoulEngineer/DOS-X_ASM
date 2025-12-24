@@ -1,0 +1,226 @@
+{
+  "main": {
+    "id": "deeca491edaab479",
+    "type": "split",
+    "children": [
+      {
+        "id": "55266287945adbee",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c9c4399b9bab1467",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "TODO.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "TODO"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "de32ca5842ae0264",
+    "type": "split",
+    "children": [
+      {
+        "id": "cff098b50820e4d0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "59a0f96defd057a9",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "299c72b8887c9468",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "3cfdf771d174a808",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "d362b2b19f1a4d6b",
+    "type": "split",
+    "children": [
+      {
+        "id": "96a7c4be1ac7ac96",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "df587ce04e0a831c",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Etapa_4/README.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for README"
+            }
+          },
+          {
+            "id": "b2a0f58dfc6498ab",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Etapa_4/README.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from README"
+            }
+          },
+          {
+            "id": "b553af22f26387a5",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "da00f6acfd36d283",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "d588256af75d29cf",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Etapa_4/README.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of README"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "c9c4399b9bab1467",
+  "lastOpenFiles": [
+    "03-Reference/Modules.md",
+    "TODO.md",
+    "03-Reference/README.md",
+    "02-Technical/README.md",
+    "02-Technical/Architecture.md",
+    "01-Getting-Started/README.md",
+    "01-Getting-Started/Project-Overview.md",
+    "01-Getting-Started/Build-Guide.md",
+    "README.md",
+    "Etapa_4/Tabel_Adevar.md",
+    "Etapa_4/README.md",
+    "Etapa_3/Calcule_Etapa_3.md",
+    "Etapa_2/Calcule_Etapa_2.md",
+    "Etapa_1/Calcule_Etapa_1.md",
+    "Etapa_1/BOM.md",
+    "00_Rezumat_Complet.md",
+    "Etapa_1/Schema_Detaliata.md",
+    "Etapa_1/Ghid_Proteus.md",
+    "Etapa_2/Verificare_Cerinte.md",
+    "Etapa_2/Analiza_Etapa2.md",
+    "Etapa_2/Analiza_Etapa1.md",
+    "Etapa_3/PROBLEMA_LOGIC_INVERSATA.md",
+    "Etapa_4/Screenshot 2025-12-21 172404.png",
+    "Etapa_4/Screenshot 2025-12-21 172419.png",
+    "00_Index.md",
+    "01_Comparatie_Exemplu.md",
+    "Etapa_4/main.cof",
+    "Etapa_4/main.HEX",
+    "Etapa_4/___sym.fil",
+    "Etapa_4/___str.fil",
+    "Etapa_4/main.O",
+    "Etapa_4/main.lst",
+    "Etapa_4/main.err",
+    "Etapa_4/main.COD",
+    "Etapa_4/configuratie.png",
+    "Etapa_4/Screenshot 2025-12-21 043137.png",
+    "Etapa_4/CEF.mcp",
+    "Etapa_4/main.map",
+    "01_Analiza_Cerinte.md"
+  ]
+}

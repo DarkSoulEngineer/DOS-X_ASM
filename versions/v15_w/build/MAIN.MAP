@@ -1,0 +1,11 @@
+
+ Start  Stop   Length Name               Class
+
+ 00000H 00478H 00479H _TEXT              CODE
+ 00480H 00BC1H 00742H _DATA              DATA
+ 00BD0H 00CCFH 00100H STACK              STACK
+ 00CD0H 00CD0H 00000H _BSS               BSS
+ 00CD0H 106CFH 0FA00H BUFFER_SEG         
+
+Program entry point at 0000:046E
+
