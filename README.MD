@@ -1,5 +1,14 @@
-DOSBox-X ASM 2D Draw App
-========================
+<h1 align="center">
+  <br>
+  <a href="">
+    <img src="https://emulation.gametechwiki.com/images/thumb/9/99/DOSBox-X.png/180px-DOSBox-X.png" alt="DOSBox-X" style="width:40%; max-width:200px; height:auto; border-radius:12px;">
+  </a>
+  <br>
+    DOSBox-X ASM 2D Draw App
+  <br>
+</h1>
+
+--------
 
 [Romanian (RO)](https://DarkSoulEngineer.github.io/DOS-X_ASM/index_ro.html) | [English (EN)](https://DarkSoulEngineer.github.io/DOS-X_ASM/index_en.html)
 
