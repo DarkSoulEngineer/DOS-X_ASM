@@ -1,0 +1,9 @@
+Build MAIN.ASM
+Turbo Assembler  Version 3.2  Copyright (c) 1988, 1992 Borland International
+
+Assembling file:   MAIN.asm  to  ..\build\MAIN.obj
+Error messages:    None
+Warning messages:  None
+Passes:            1
+Remaining memory:  424k
+
