@@ -39,12 +39,12 @@ Menu-driven drawing toolkit for DOS, written in 16-bit x86 assembly (8086). Runs
 
 ## Project Layout
 
-- `app/src` — assembly sources (`MAIN.ASM`, `MENU.ASM`, `IO.ASM`, `FILE.ASM`, `PIXEL.ASM`, `SHAPES.ASM`, `INP.ASM`, `DATA.ASM`)
-- `app/scripts` — build helpers (`build.bat`, `clean.bat`)
-- `app/build` — generated `.EXE`, `.OBJ`, `.MAP`, `.BIN`, logs
-- `app/tools` — TASM, TLINK, Turbo Debugger
-- `docs` — Obsidian vault with getting-started, architecture, and module reference
-- `assets` / `versions` — supporting media and backups
+- `app/src`: assembly sources (`MAIN.ASM`, `MENU.ASM`, `IO.ASM`, `FILE.ASM`, `PIXEL.ASM`, `SHAPES.ASM`, `INP.ASM`, `DATA.ASM`)
+- `app/scripts`: build helpers (`build.bat`, `clean.bat`)
+- `app/build`: generated `.EXE`, `.OBJ`, `.MAP`, `.BIN`, logs
+- `app/tools`: TASM, TLINK, Turbo Debugger
+- `docs`: Obsidian vault with getting-started, architecture, and module reference
+- `assets` / `versions`: supporting media and backups
 
 ## Installation
 
@@ -103,7 +103,7 @@ Menu-driven drawing toolkit for DOS, written in 16-bit x86 assembly (8086). Runs
 
 ## Documentation
 
-The `docs/` folder is an Obsidian vault — start at [docs/README.md](docs/README.md) for the index.
+The `docs/` folder is an Obsidian vault: start at [docs/README.md](docs/README.md) for the index.
 
 - New to the project? Follow [Project Overview](docs/01-Getting-Started/Project-Overview.md) then the [Build Guide](docs/01-Getting-Started/Build-Guide.md).
 - For design details, see [Architecture](docs/02-Technical/Architecture.md).
@@ -111,8 +111,8 @@ The `docs/` folder is an Obsidian vault — start at [docs/README.md](docs/READM
 
 ## Acknowledgments
 
-Universitatea Transilvania din Brasov — MIC (Microcontrollers), 2025.
+Universitatea Transilvania din Brasov (MIC, Microcontrollers), 2025.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).
